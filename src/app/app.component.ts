@@ -14,20 +14,18 @@ import {
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent implements DoCheck {
-  a = [1, 2, 3];
 
   employee1 = { id: 1, name: "Test 1" };
   employee2 = { id: 2, name: "Test 2" };
-  employee3 = { id: 1, name: "Test 1" };
+  employee3 = { id: 3, name: "Test 3" };
+
 
   employees = [this.employee1, this.employee2];
 
   private differ: IterableDiffer<any> = null;
 
   constructor(private _iterableDiffers: IterableDiffers) {
-    this.differ = this._iterableDiffers
-      .find(this.employees)
-      .create(this.trackByFn);
+    this.differ = this._iterableDiffers.find(this.employees).create();
   }
 
   ngDoCheck() {
@@ -53,12 +51,6 @@ export class AppComponent implements DoCheck {
   }
 
   btnClicked() {
-    this.a = [1, 3, 4];
-
-    this.employees = [this.employee3, this.employee2];
-  }
-
-  trackByFn(employee) {
-    return employee.id;
+    this.employees = [this.employee2, this.employee3];
   }
 }
